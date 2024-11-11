@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ post.name }} ({{ post.release_year }})
+{% endblock title %}
+{% block content %}
+    <h2>Detalhes do Livro "{{ post.name }} ({{ post.release_year }})"</h2>
+    <section class="dados-de-livro">
+        <img src="{{ post.capa_url }}" alt="Capa do livro {{ post.name }}" style="margin-left: 40px;"/>
+        <ul>
+            <li style="margin-bottom: 8px;"><strong>Nome:</strong> {{ post.name }}</li>
+            <li style="margin-bottom: 8px;"><strong>Ano de Lançamento:</strong> {{ post.release_year }}</li>
+            <li style="margin-bottom: 15px;"><div><strong>Sinopse:</strong> {{ post.content|safe }}</div></li> <hr>
+            <li><strong>Data de postagem:</strong> {{ post.data_postagem|date:"d/m/Y" }}</li> 
+        </ul>
+    </section>
+    <hr>
+{% endblock content %}
+    
