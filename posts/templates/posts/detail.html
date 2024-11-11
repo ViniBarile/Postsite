@@ -16,5 +16,28 @@
         </ul>
     </section>
     <hr>
+
+    <section>
+        <header>
+            <h3>Resenhas</h3>
+        </header>
+        <ul>
+            {% if post.comment_set.all %}
+            {% for comment in post.comment_set.all|dictsortreversed:"data_postagem" %}
+                    <figure>
+                        <blockquote>
+                            "{{ comment.text }}"
+                        </blockquote>
+                        <figcaption>—{{ comment.author }} ({{ comment.data_postagem|date:"d/m/Y" }})</figcaption>
+                    </figure>
+                {% endfor %}
+            {% else %}
+                <p>Ainda não existe nenhuma resenha para este livro.</p>
+            {% endif %}
+        </ul>
+        <hr>
+
+        <a href="{% url 'posts:comment' post.pk %}"><button>Crie sua Resenha</button></a>
+    </section>
 {% endblock content %}
     
