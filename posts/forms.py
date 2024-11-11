@@ -10,12 +10,14 @@ class PostForm(ModelForm):
             'release_year',
             'capa_url',
             'content',
+            'categories',
         ]
         labels = {
             'name': 'Título',
             'release_year': 'Data de Lançamento',
             'capa_url': 'URL da Capa',
             'content': 'Sinopse',
+            'categories': 'Gêneros',
         }
 
 class CommentForm(ModelForm):

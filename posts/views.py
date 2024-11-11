@@ -1,4 +1,4 @@
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
@@ -26,13 +26,13 @@ class PostDetailView(generic.DetailView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'posts/create.html'
-    fields = ['name', 'release_year', 'capa_url', 'content']
+    fields = ['name', 'release_year', 'capa_url', 'content', 'categories']
     success_url = reverse_lazy('posts:index')
 
 class PostUpdateView(UpdateView):
     model = Post
     template_name = 'posts/update.html'
-    fields = ['name', 'release_year', 'capa_url', 'content']
+    fields = ['name', 'release_year', 'capa_url', 'content', 'categories']
     def get_success_url(self):
         return reverse('posts:detail', args=[self.object.id])
 
@@ -58,3 +58,20 @@ def create_comment(request, post_id):
         form = CommentForm()
     context = {'form': form, 'post': post}
     return render(request, 'posts/comment.html', context)
+
+class CategoryListView(generic.ListView):
+    model = Category
+    template_name = 'posts/category_list.html'
+    context_object_name = 'categories'
+
+class CategoryDetailView(ListView):
+    model = Post
+    template_name = 'posts/category_detail.html'
+    context_object_name = 'post_list'
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, pk=self.kwargs['category_id'])
+        return Post.objects.filter(categories=self.category)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context

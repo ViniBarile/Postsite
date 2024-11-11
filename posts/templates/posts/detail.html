@@ -14,6 +14,12 @@
             <li><a href="{% url 'posts:update' post.id %}">Editar</a></li>
             <li><a href="{% url 'posts:delete' post.id %}">Apagar</a></li> <hr>
         </ul>
+        <p><strong>Gêneros:</strong></p>
+        <ul>
+            {% for category in post.categories.all %}
+                <li><a href="{% url 'posts:category-detail' category.pk %}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
     </section>
     <hr>
 
