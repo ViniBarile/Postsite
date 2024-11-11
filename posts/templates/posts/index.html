@@ -13,11 +13,12 @@
 <section class="lista-de-cards">
   {% for post in post_list %}
   <article class="card">
-    <a href="{% url 'posts:detail' forloop.counter %}">
-        <img src="{{ post.capa_url }}" alt="Capa do livro {{ post.name}}"/>
+    <a href="{% url 'posts:detail' post.id %}">
+        <img src="{{ post.capa_url }}" alt="Capa do livro {{ post.name }}" />
     </a>
     <p>{{ post.name }} ({{ post.release_year }})</p>
-  </article>
+    <p><strong>Data de postagem:</strong> {{ post.data_postagem|date:"d/m/Y" }}</p>
+</article>
   {% endfor %}
 </section>
 {% else %}

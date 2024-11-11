@@ -11,6 +11,8 @@
             <li style="margin-bottom: 8px;"><strong>Ano de Lançamento:</strong> {{ post.release_year }}</li>
             <li style="margin-bottom: 15px;"><div><strong>Sinopse:</strong> {{ post.content|safe }}</div></li> <hr>
             <li><strong>Data de postagem:</strong> {{ post.data_postagem|date:"d/m/Y" }}</li> 
+            <li><a href="{% url 'posts:update' post.id %}">Editar</a></li>
+            <li><a href="{% url 'posts:delete' post.id %}">Apagar</a></li> <hr>
         </ul>
     </section>
     <hr>
