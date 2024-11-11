@@ -26,13 +26,13 @@ class PostDetailView(generic.DetailView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'posts/create.html'
-    fields = ['name', 'release_year', 'capa_url', 'content', 'categories']
+    form_class = PostForm
     success_url = reverse_lazy('posts:index')
 
 class PostUpdateView(UpdateView):
     model = Post
     template_name = 'posts/update.html'
-    fields = ['name', 'release_year', 'capa_url', 'content', 'categories']
+    form_class = PostForm
     def get_success_url(self):
         return reverse('posts:detail', args=[self.object.id])
 

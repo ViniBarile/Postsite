@@ -3,15 +3,19 @@
 {% block content %}
     <h2>Gênero: {{ category.name }}</h2>
     <p>{{ category.description }}</p>
-    <section class="lista-de-cards">
-        {% for post in post_list %}
+    {% if post_list %}
+        <section class="lista-de-cards">
+            {% for post in post_list|dictsortreversed:"data_postagem" %}
             <article class="card">
                 <a href="{% url 'posts:detail' post.id %}">
                     <img src="{{ post.capa_url }}" alt="Capa do livro {{ post.name }}" />
                 </a>
                 <p>{{ post.name }} ({{ post.release_year }})</p>
-                <p>Data de postagem: {{ post.data_postagem|date:"d/m/Y" }}</p>
+                <p><strong>Data de postagem:</strong> {{ post.data_postagem|date:"d/m/Y" }}</p>
             </article>
-        {% endfor %}
-    </section>
+            {% endfor %}
+        </section>
+    {% else %}
+        <p>Não foi encontrado nenhum livro.</p>
+    {% endif %}
 {% endblock content %}
