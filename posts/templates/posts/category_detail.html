@@ -2,6 +2,7 @@
 
 {% block content %}
     <h2>Gênero: {{ category.name }}</h2>
+    <p>{{ category.description }}</p>
     <section class="lista-de-cards">
         {% for post in post_list %}
             <article class="card">
